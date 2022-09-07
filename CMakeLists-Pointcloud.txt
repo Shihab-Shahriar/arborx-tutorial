@@ -1,0 +1,23 @@
+set (CMAKE_CXX_STANDARD 14)
+
+add_executable(verify verify.cpp)
+find_package(OpenMP)
+if(OpenMP_CXX_FOUND)
+    target_link_libraries(verify PUBLIC OpenMP::OpenMP_CXX)
+endif()
+
+find_package(ArborX REQUIRED)
+target_link_libraries(verify ArborX::ArborX)
+
+
+add_test(
+  NAME PointCloud
+  COMMAND
+    bash -c "
+    python3 GenTestDataset.py \
+    && export OMP_NUM_THREADS=4 \
+    && mpirun -n 2 ./verify > verify.log \
+    && python3 Verify.py")
+set_tests_properties(PointCloud PROPERTIES FAIL_REGULAR_EXPRESSION
+                                           "[^a-z]Error;ERROR;Failed")
+
