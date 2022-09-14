@@ -21,7 +21,7 @@ If it goes well, kokkos will be installed in `$HOME/envs/stb_intel_13/` director
 ### Installing ArborX
 + Copy the [source](https://github.com/arborx/ArborX) in HPCC.
 + Copy both `do-cmake-cpu-arborx.sh` and `compile-arborx.py`files to the source directory.
-+ Run `python3 ./compile-kokkos.py`. 
++ Run `python3 ./compile-arborx.py`. 
 
 There should be a `build_Arborx-CPU` folder inside source directory if all goes well. It'll contain several built examples too that you can play with.
 
